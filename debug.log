@@ -1,0 +1,13 @@
+[0529/232801.869:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0531/164316.639:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0531/164316.641:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0531/164316.636:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0531/164316.645:ERROR:exception_snapshot_win.cc(88)] thread ID 18036 not found in process
+[0531/164316.645:ERROR:exception_snapshot_win.cc(88)] thread ID 15604 not found in process
+[0531/164316.646:ERROR:exception_snapshot_win.cc(88)] thread ID 7292 not found in process
+[0531/164316.646:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[0531/164316.646:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[0531/164316.646:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[0531/164316.644:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0531/164316.651:ERROR:exception_snapshot_win.cc(88)] thread ID 16776 not found in process
+[0531/164316.651:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed

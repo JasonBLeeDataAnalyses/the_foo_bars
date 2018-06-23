@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NBA Datadive</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylsheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.6/footable.bootstrap.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.6/footable.bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.6/footable.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.6/footable.min.js"></script>
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/style.css') }}">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/D3Style.css') }}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.3/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+
+
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">FooBar Basketball</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Regular Season Data
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/regular/basic/">All Player Basic Stats</a></li>
+                <li><a href="/regular/adv/">All Player Advanced Stats</a></li>
+                <li><a href="/regular/basic/LeBron-James">Basic (Sample)</a></li>
+                <li><a href="/regular/adv/LeBron-James">Advanced (Sample)</a></li>
+                <li><a href="/regular/q1/LeBron-James">Q1 (Sample)</a></li>
+                <li><a href="/regular/q2/LeBron-James">Q2 (Sample)</a></li>
+                <li><a href="/regular/q3/LeBron-James">Q3 (Sample)</a></li>
+                <li><a href="/regular/q4/LeBron-James">Q4 (Sample)</a></li>
+                <li><a href="/regular/clutch/LeBron-James">Clutch (Sample)</a></li>
+                <li><a href="/regular/ot/LeBron-James">OT (Sample)</a></li>
+                <li><a href="/regular/zones/LeBron-James">Zones (Sample)</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Playoffs Data
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/playoffs/basic/">All Player Basic Stats</a></li>
+                    <li><a href="/playoffs/adv/">All Player Advanced Stats</a></li>
+                    <li><a href="/playoffs/basic/LeBron-James">Basic (Sample)</a></li>
+                    <li><a href="/playoffs/adv/LeBron-James">Advanced (Sample)</a></li>
+                    <li><a href="/playoffs/q1/LeBron-James">Q1 (Sample)</a></li>
+                    <li><a href="/playoffs/q2/LeBron-James">Q2 (Sample)</a></li>
+                    <li><a href="/playoffs/q3/LeBron-James">Q3 (Sample)</a></li>
+                    <li><a href="/playoffs/q4/LeBron-James">Q4 (Sample)</a></li>
+                    <li><a href="/playoffs/clutch/LeBron-James">Clutch (Sample)</a></li>
+                    <li><a href="/playoffs/ot/LeBron-James">OT (Sample)</a></li>
+                    <li><a href="/playoffs/zones/LeBron-James">Zones (Sample)</a></li>
+                </ul>
+              </li>
+            <li><a href="/bio/LeBron-James">Player Bio</a></li>
+          </ul>
+        </div>
+      </nav>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="jumbotron">
+          <center><h1 class="title">FooBar Basketball</h1></center>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-7 border-box">
+      <div class="col-md-12">
+        <p class="title">All the data is from <a href="https://www.nba.com">NBA.com</a>. To see a sample of the data go to the navigation bar and find data that you would like to see. All samples and default graphs below are for LeBron James. The data can be changed, though! Just search the player you would like to search for. <br><br>
+          <em>Important Note! Case and Punctuation matter when searching for players in our API and when updating the graphs. For example, if you are trying to update the graph, the search "lebron james" won't work, but "LeBron James" will. Similar, when searching through the API, going to "/regular/basic/tim_hardaway_jr" won't work, but "/regular/basic/Tim-Hardaway-Jr." will.</em> <br><br></p>
+      </div>
+    </div>
+    <div class="col-md-3 border-box">
+      <div class="form-group">
+        <center><input type="text" class="form-control" id="playerSearch" placeholder="Search Player Name (Case Sensitive)">
+        <a id="searchButton" class="btn btn-default">Search</a></center>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-10 border-box">
+      <div class="row">
+        <h2>Player Heat Map</h2>
+        <p>The graphical representation of the court shows how well a player shoots from a given area on the court. The color corresponds to how well that particular player shoots with respect to the league wide average from the same spots. Red indicates that the player shoots worse than the league average, while green indicates that the particular player shoots well from the zone.</p>
+        <div class="col-md-5">
+            <div id="svg-area"></div>
+        </div>
+        <div class="col-md-7">
+            <div id="bio-area">
+            </div>
+            <table id="table-area">
+
+            </table>
+        </div>
+      </div>
+    </div>
+      <div class="col-md-1">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div class="col-md-12 border-box">
+      <h2>Shooting Percentage Graph</h2>
+      <div id="linechart"></div>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+
+  <div class="container">
+      <div class="row">
+      <div class="col-md-12 border-box">
+        <div class="col-xs-12 col-md-12">
+          <h2>NBA Scatter</h2>
+        </div>
+        <div class="col-xs-12  col-md-9">
+          <div class="iframeContainer">
+            <div class="embed-responsive embed-responsive-4by3">
+                <div id="scatter"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <style>
+
+  </style>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="{{ url_for('static', filename='JS/app.js') }}"></script>
+</body>
+</html>
